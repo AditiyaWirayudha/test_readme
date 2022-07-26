@@ -4,10 +4,12 @@
 
 # Modul 1
 
-Soal No.1
+Soal 
 1. Lakukan proses instalasi framework laravel kedalam folder dengan nama masing-masing.
+2. Buatlah projek pertama laravel dengan nama projek “penjualan” dan tampilkan dalam browser
 
 ![image](https://user-images.githubusercontent.com/109930265/180904081-0275fe5b-4b0e-4067-88b7-fa93806a05bd.png)
+
 
 # Modul 2
 
@@ -61,6 +63,94 @@ php artisan make:seeder KategoriTableSeeder
 ```
 dan buka KategoriTableSeeder dan isi dengan kode
 ```
+<?php
 
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use DB;
+
+class kategoriTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('kategori')->insert(array(
+            [
+                'nama' => 'Perlengkapan sekolah',    
+            ],
+            [
+                'nama' => 'Komputer',    
+            ],
+            [
+                'nama' => 'Sabun',    
+            ],
+            [
+                'nama' => 'Accesories',    
+            ],
+            [
+                'nama' => 'ATK',    
+            ]
+
+            ));
+        
+    }
+}
+```
+lalu buka DatabaseSeeder.php dan isis dengfan kode ini
+```
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call(produkTableSeeder::class);
+        $this->call(kategoriTableSeeder::class);
+    }
+}
+```
+Sekarang kita bisa menjalankan perintah atisan pada comand prompt untuk mengeksekusi seeder yang 
+telah dibaut dengan perintah sebagai berikut
+
+```
+php artisan db:seed
+```
+
+
+langkah 3 Membuat model
+```
+php artisan make:model kategori
+```
+ dan tambahkan script deperti ini
+ ```
+ <?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Kategori extends Model
+{
+    use HasFactory;
+    protected $table = 'kategori';
+}
+```
 
 
